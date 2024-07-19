@@ -2,6 +2,7 @@
 using Mongo.Web.Models;
 using Mongo.Web.Service.IService;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Mongo.Web.Controllers
 {
@@ -25,6 +26,27 @@ namespace Mongo.Web.Controllers
                 list = JsonConvert.DeserializeObject<List<CouponDto>>(Convert.ToString(response.Result));
             }
             return View(list);
+        }
+
+        public async Task<IActionResult> CouponCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CouponCreate(CouponDto couponDto)
+        {
+            if (ModelState.IsValid)
+            {
+                ResponseDto? response = await _couponService.CreateCouponAsync(couponDto);
+
+                if (response != null && response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(CouponIndex));
+                }
+            }
+
+            return View(couponDto);
         }
     }
 }
