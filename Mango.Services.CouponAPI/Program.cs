@@ -7,11 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<AppDbContext>(options => {
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-IMapper mapper=MappingConfig.RegisterMaps().CreateMapper();
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 //builder.Services.AddAutoMapper(System.Reflection.Assembly.GetExecutingAssembly());
 
@@ -39,9 +40,9 @@ app.Run();
 
 void ApplyMIgration()
 {
-    using(var scope = app.Services.CreateScope())
+    using (var scope = app.Services.CreateScope())
     {
-        var _db=scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var _db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         if (_db.Database.GetPendingMigrations().Count() > 0)
         {
             _db.Database.Migrate();

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Mongo.Services.AuthAPI.Models.Dto;
+using Mongo.Services.AuthAPI.Service.IService;
 
 namespace Mongo.Services.AuthAPI.Controllers
 {
@@ -7,16 +9,58 @@ namespace Mongo.Services.AuthAPI.Controllers
     [ApiController]
     public class AuthAPIController : ControllerBase
     {
-        [HttpPost("register")]
-        public async Task<IActionResult> Register()
+        private readonly IAuthService _authService;
+        protected ResponseDto _response;
+
+        public AuthAPIController(IAuthService authService)
         {
-            return Ok();
+            _authService = authService;
+            _response = new();
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegistrationRequestDto request)
+        {
+            var responseMessage = await _authService.Register(request);
+
+            if (!string.IsNullOrEmpty(responseMessage))
+            {
+                _response.IsSuccess = false;
+                _response.Message = responseMessage;
+
+                return BadRequest(_response);
+            }
+
+            return Ok(responseMessage);
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
         {
-            return Ok();
+            var loginResponse = await _authService.Login(request);
+            if (loginResponse.User == null)
+            {
+                _response.IsSuccess = false;
+                _response.Message = "Username or password is incorrect";
+                return BadRequest(_response);
+            }
+
+            _response.Result = loginResponse;
+            return Ok(_response);
+        }
+
+        [HttpPost("AssignRole")]
+        public async Task<IActionResult> AssignRole([FromBody] RegistrationRequestDto request)
+        {
+            var assignRoleSucessful = await _authService.AssignRole(request.Email, request.Role.ToUpper());
+            if (!assignRoleSucessful)
+            {
+                _response.IsSuccess = false;
+                _response.Message = "Error encounted";
+                return BadRequest(_response);
+            }
+
+            return Ok(_response);
         }
     }
 }
