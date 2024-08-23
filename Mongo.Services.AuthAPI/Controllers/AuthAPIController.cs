@@ -31,7 +31,7 @@ namespace Mongo.Services.AuthAPI.Controllers
                 return BadRequest(_response);
             }
 
-            return Ok(responseMessage);
+            return Ok(_response);
         }
 
         [HttpPost("login")]
@@ -49,10 +49,10 @@ namespace Mongo.Services.AuthAPI.Controllers
             return Ok(_response);
         }
 
-        [HttpPost("AssignRole")]
+        [HttpPost("assignRole")]
         public async Task<IActionResult> AssignRole([FromBody] RegistrationRequestDto request)
         {
-            var assignRoleSucessful = await _authService.AssignRole(request.Email, request.Role.ToUpper());
+            var assignRoleSucessful = await _authService.AssignRole(request.Email, request?.Role?.ToUpper());
             if (!assignRoleSucessful)
             {
                 _response.IsSuccess = false;

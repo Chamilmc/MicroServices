@@ -26,7 +26,7 @@ namespace Mongo.Services.AuthAPI.Service
 
         public async Task<bool> AssignRole(string eamil, string roleName)
         {
-            var user = _db.ApplicationUsers.FirstOrDefault(x => eamil.ToLower() == eamil.ToLower());
+            var user = _db.ApplicationUsers.FirstOrDefault(x => x.Email.ToLower() == eamil.ToLower());
             if (user != null)
             {
                 if (!_roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
@@ -56,6 +56,8 @@ namespace Mongo.Services.AuthAPI.Service
                 };
             }
 
+            var roles= await _userManager.GetRolesAsync(user);
+
             UserDto userDto = new()
             {
                 Email = user.Email,
@@ -67,7 +69,7 @@ namespace Mongo.Services.AuthAPI.Service
             LoginResponseDto loginResponseDto = new()
             {
                 User = userDto,
-                Token = _jwtTokenGenerator.GenerateToken(user)
+                Token = _jwtTokenGenerator.GenerateToken(user, roles)
             };
 
             return loginResponseDto;

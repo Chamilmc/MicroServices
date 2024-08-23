@@ -6,6 +6,6 @@ namespace Mongo.Services.AuthAPI.Service.IService
     {
         Task<string> Register(RegistrationRequestDto registrationRequestDto);
         Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
-        Task<bool> AssignRole(string eamil, string roleName);
+        Task<bool> AssignRole(string? eamil, string? roleName);
     }
 }
