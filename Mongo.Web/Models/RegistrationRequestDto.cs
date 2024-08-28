@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Mongo.Web.Models
+namespace Mango.Web.Models
 {
     public class RegistrationRequestDto
     {

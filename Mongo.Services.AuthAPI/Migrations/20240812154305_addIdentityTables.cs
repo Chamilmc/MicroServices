@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Mongo.Services.AuthAPI.Migrations
+namespace Mango.Services.AuthAPI.Migrations
 {
     /// <inheritdoc />
     public partial class addIdentityTables : Migration

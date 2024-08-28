@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Mango.Web.Utility;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Mongo.Web.Models;
-using Mongo.Web.Service.IService;
-using Mongo.Web.Utility;
+using Mango.Web.Models;
+using Mango.Web.Service.IService;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace Mongo.Web.Controllers
+namespace Mango.Web.Controllers
 {
     public class AuthController : Controller
     {

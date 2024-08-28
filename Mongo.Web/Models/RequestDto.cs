@@ -1,6 +1,6 @@
-﻿using static Mongo.Web.Utility.SD;
+﻿using static Mango.Web.Utility.SD;
 
-namespace Mongo.Web.Models
+namespace Mango.Web.Models
 {
     public class RequestDto
     {

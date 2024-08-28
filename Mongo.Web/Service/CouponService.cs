@@ -1,8 +1,9 @@
-﻿using Mongo.Web.Models;
-using Mongo.Web.Service.IService;
-using Mongo.Web.Utility;
+﻿using Mango.Web.Models;
+using Mango.Web.Utility;
+using Mango.Web.Models;
+using Mango.Web.Service.IService;
 
-namespace Mongo.Web.Service
+namespace Mango.Web.Service
 {
     public class CouponService : ICouponService
     {

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Mongo.Services.AuthAPI.Migrations
+namespace Mango.Services.AuthAPI.Migrations
 {
     /// <inheritdoc />
     public partial class addNameToAspNetUsers : Migration

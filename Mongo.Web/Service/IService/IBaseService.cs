@@ -1,6 +1,6 @@
-﻿using Mongo.Web.Models;
+﻿using Mango.Web.Models;
 
-namespace Mongo.Web.Service.IService
+namespace Mango.Web.Service.IService
 {
     public interface IBaseService
     {

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Mango.Services.AuthAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Mongo.Services.AuthAPI.Models;
 
-namespace Mongo.Services.AuthAPI.Data
+namespace Mango.Services.AuthAPI.Data
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -15,7 +15,7 @@ namespace Mongo.Services.AuthAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-             base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Mongo.Web.Models;
+using Mango.Web.Models;
 using System.Diagnostics;
 
-namespace Mongo.Web.Controllers
+namespace Mango.Web.Controllers
 {
     public class HomeController : Controller
     {

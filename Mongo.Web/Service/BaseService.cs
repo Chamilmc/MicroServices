@@ -1,9 +1,10 @@
-﻿using Mongo.Web.Models;
-using Mongo.Web.Service.IService;
+﻿using Mango.Web.Utility;
+using Mango.Web.Models;
+using Mango.Web.Service.IService;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace Mongo.Web.Service
+namespace Mango.Web.Service
 {
     public class BaseService : IBaseService
     {
@@ -43,13 +44,13 @@ namespace Mongo.Web.Service
 
                 switch (requestDto.ApiType)
                 {
-                    case Utility.SD.ApiType.POST:
+                    case SD.ApiType.POST:
                         message.Method = HttpMethod.Post;
                         break;
-                    case Utility.SD.ApiType.DELETE:
+                    case SD.ApiType.DELETE:
                         message.Method = HttpMethod.Delete;
                         break;
-                    case Utility.SD.ApiType.PUT:
+                    case SD.ApiType.PUT:
                         message.Method = HttpMethod.Put;
                         break;
                     default:

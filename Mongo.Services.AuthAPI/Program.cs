@@ -1,10 +1,10 @@
+using Mango.Services.AuthAPI.Data;
+using Mango.Services.AuthAPI.Models;
 using Mango.Services.CouponAPI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Mongo.Services.AuthAPI.Data;
-using Mongo.Services.AuthAPI.Models;
-using Mongo.Services.AuthAPI.Service;
-using Mongo.Services.AuthAPI.Service.IService;
+using Mango.Services.AuthAPI.Service;
+using Mango.Services.AuthAPI.Service.IService;
 
 var builder = WebApplication.CreateBuilder(args);
 

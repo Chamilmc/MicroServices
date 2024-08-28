@@ -1,13 +1,13 @@
-﻿using Mango.Services.CouponAPI.Models;
+﻿using Mango.Services.AuthAPI.Models;
+using Mango.Services.AuthAPI.Service.IService;
+using Mango.Services.CouponAPI.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Mongo.Services.AuthAPI.Models;
-using Mongo.Services.AuthAPI.Service.IService;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Mongo.Services.AuthAPI.Service
+namespace Mango.Services.AuthAPI.Service
 {
     public class JwtTokenGenerator : IJwtTokenGenerator
     {

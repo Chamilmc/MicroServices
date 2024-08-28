@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Mongo.Services.AuthAPI.Data;
-using Mongo.Services.AuthAPI.Models;
-using Mongo.Services.AuthAPI.Models.Dto;
-using Mongo.Services.AuthAPI.Service.IService;
+﻿using Mango.Services.AuthAPI.Data;
+using Mango.Services.AuthAPI.Models;
+using Mango.Services.AuthAPI.Models.Dto;
+using Microsoft.AspNetCore.Identity;
+using Mango.Services.AuthAPI.Models.Dto;
+using Mango.Services.AuthAPI.Service.IService;
 
-namespace Mongo.Services.AuthAPI.Service
+namespace Mango.Services.AuthAPI.Service
 {
     public class AuthService : IAuthService
     {

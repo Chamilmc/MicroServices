@@ -1,4 +1,4 @@
-﻿namespace Mongo.Web.Service.IService
+﻿namespace Mango.Web.Service.IService
 {
     public interface ITokenProvider
     {

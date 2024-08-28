@@ -1,6 +1,6 @@
-﻿using Mongo.Services.AuthAPI.Models.Dto;
+﻿using Mango.Services.AuthAPI.Models.Dto;
 
-namespace Mongo.Services.AuthAPI.Service.IService
+namespace Mango.Services.AuthAPI.Service.IService
 {
     public interface IAuthService
     {

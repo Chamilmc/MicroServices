@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Mango.Services.AuthAPI.Models.Dto;
+using Mango.Services.AuthAPI.Service.IService;
 using Microsoft.AspNetCore.Mvc;
-using Mongo.Services.AuthAPI.Models.Dto;
-using Mongo.Services.AuthAPI.Service.IService;
-
-namespace Mongo.Services.AuthAPI.Controllers
+namespace Mango.Services.AuthAPI.Controllers
 {
     [Route("api/auth")]
     [ApiController]

@@ -1,7 +1,7 @@
-﻿using Mongo.Web.Service.IService;
-using Mongo.Web.Utility;
+﻿using Mango.Web.Utility;
+using Mango.Web.Service.IService;
 
-namespace Mongo.Web.Service
+namespace Mango.Web.Service
 {
     public class TokenProvider : ITokenProvider
     {

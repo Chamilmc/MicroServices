@@ -1,6 +1,6 @@
-﻿using Mongo.Services.AuthAPI.Models;
+﻿using Mango.Services.AuthAPI.Models;
 
-namespace Mongo.Services.AuthAPI.Service.IService
+namespace Mango.Services.AuthAPI.Service.IService
 {
     public interface IJwtTokenGenerator
     {

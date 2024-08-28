@@ -1,4 +1,4 @@
-﻿namespace Mongo.Web.Utility
+﻿namespace Mango.Web.Utility
 {
     public class SD
     {
