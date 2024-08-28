@@ -2,8 +2,6 @@
 using Mango.Services.CouponAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
@@ -41,7 +39,7 @@ namespace Mango.Services.CouponAPI.Migrations
 
                     b.HasKey("CouponId");
 
-                    b.ToTable("Coupons");
+                    b.ToTable("Coupons", (string)null);
 
                     b.HasData(
                         new
