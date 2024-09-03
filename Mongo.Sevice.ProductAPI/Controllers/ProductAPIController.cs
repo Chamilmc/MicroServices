@@ -9,7 +9,6 @@ namespace Mango.Services.ProductAPI.Controllers
 {
     [Route("api/product")]
     [ApiController]
-    [Authorize]
     public class ProductAPIController : ControllerBase
     {
         private readonly AppDbContext _db;
@@ -49,30 +48,6 @@ namespace Mango.Services.ProductAPI.Controllers
             try
             {
                 _response.Result = _mapper.Map<ProductDto>(_db.Products.FirstOrDefault(x => x.ProductId == id));
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.Message = ex.Message;
-            }
-
-            return _response;
-        }
-
-        [HttpGet]
-        [Route("GetByCode/{code}")]
-        public ResponseDto GetByCode(string code)
-        {
-            try
-            {
-                var obj = _db.Products.FirstOrDefault(x => x.Name.ToLower() == code.ToLower());
-                if (obj == null)
-                {
-                    _response.IsSuccess = false;
-                }
-                _response.Result = _mapper.Map<ProductDto>(obj);
-
-
             }
             catch (Exception ex)
             {
