@@ -84,7 +84,7 @@ namespace Mango.Services.CouponAPI.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles ="ADMIN")]
+        [Authorize(Roles = "ADMIN")]
         public ResponseDto Post([FromBody] CouponDto couponDto)
         {
             try
@@ -133,7 +133,7 @@ namespace Mango.Services.CouponAPI.Controllers
         {
             try
             {
-                var obj = _db.Coupons.FirstOrDefault(x=>x.CouponId==id);
+                var obj = _db.Coupons.FirstOrDefault(x => x.CouponId == id);
                 _db.Coupons.Remove(obj);
 
                 _db.SaveChanges();
