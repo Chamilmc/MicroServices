@@ -20,9 +20,10 @@ public class ProductService : IProductService
 
         var apiContent = await response.Content.ReadAsStringAsync();
         var resp = JsonConvert.DeserializeObject<ResponseDto>(apiContent);
-        if (resp.IsSuccess)
+        if (resp!.IsSuccess)
         {
-            return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(Convert.ToString(resp.Result));
+            return JsonConvert.DeserializeObject<IEnumerable<ProductDto>>(Convert.ToString(resp!.Result!)
+              ?? string.Empty);
         }
         return new List<ProductDto>();
     }

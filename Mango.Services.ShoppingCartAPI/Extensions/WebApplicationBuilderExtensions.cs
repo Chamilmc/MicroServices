@@ -12,7 +12,7 @@ public static class WebApplicationBuilderExtensions
         var issuer = builder.Configuration.GetValue<string>("ApiSettings:Issuer");
         var audience = builder.Configuration.GetValue<string>("ApiSettings:Audience");
 
-        var key = Encoding.ASCII.GetBytes(secret);
+        var key = Encoding.ASCII.GetBytes(secret!);
 
         builder.Services.AddAuthentication(x =>
         {

@@ -21,7 +21,9 @@ public class CouponService : ICouponService
         var resp = JsonConvert.DeserializeObject<ResponseDto>(apiContet);
         if (resp != null && resp.IsSuccess)
         {
-            return JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(resp.Result));
+            return JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(resp!.Result!)
+             ?? string.Empty)
+             ?? new CouponDto();
         }
 
         return new CouponDto();

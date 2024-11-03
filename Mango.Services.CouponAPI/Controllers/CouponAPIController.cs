@@ -5,146 +5,145 @@ using Mango.Services.CouponAPI.Models.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mango.Services.CouponAPI.Controllers
+namespace Mango.Services.CouponAPI.Controllers;
+
+[Route("api/coupon")]
+[ApiController]
+[Authorize]
+public class CouponAPIController : ControllerBase
 {
-    [Route("api/coupon")]
-    [ApiController]
-    [Authorize]
-    public class CouponAPIController : ControllerBase
+    private readonly AppDbContext _db;
+    private readonly IMapper _mapper;
+    private ResponseDto _response;
+
+    public CouponAPIController(AppDbContext appDbContext,
+        IMapper mapper)
     {
-        private readonly AppDbContext _db;
-        private readonly IMapper _mapper;
-        private ResponseDto _response;
+        _db = appDbContext;
+        _mapper = mapper;
+        _response = new ResponseDto();
+    }
 
-        public CouponAPIController(AppDbContext appDbContext,
-            IMapper mapper)
+    [HttpGet]
+    public ResponseDto Get()
+    {
+        try
         {
-            _db = appDbContext;
-            _mapper = mapper;
-            _response = new ResponseDto();
+            IEnumerable<Coupon> objList = _db.Coupons.ToList();
+            _response.Result = _mapper.Map<IEnumerable<CouponDto>>(objList);
+
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
         }
 
-        [HttpGet]
-        public ResponseDto Get()
-        {
-            try
-            {
-                IEnumerable<Coupon> objList = _db.Coupons.ToList();
-                _response.Result = _mapper.Map<IEnumerable<CouponDto>>(objList);
+        return _response;
+    }
 
-            }
-            catch (Exception ex)
+    [HttpGet]
+    [Route("{id:int}")]
+    public ResponseDto Get(int id)
+    {
+        try
+        {
+            _response.Result = _mapper.Map<CouponDto>(_db.Coupons.FirstOrDefault(x => x.CouponId == id));
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
+        }
+
+        return _response;
+    }
+
+    [HttpGet]
+    [Route("GetByCode/{code}")]
+    public ResponseDto GetByCode(string code)
+    {
+        try
+        {
+            var obj = _db.Coupons.FirstOrDefault(x => x.CouponCode!.ToLower() == code.ToLower());
+            if (obj == null)
             {
                 _response.IsSuccess = false;
-                _response.Message = ex.Message;
             }
+            _response.Result = _mapper.Map<CouponDto>(obj);
 
-            return _response;
+
         }
-
-        [HttpGet]
-        [Route("{id:int}")]
-        public ResponseDto Get(int id)
+        catch (Exception ex)
         {
-            try
-            {
-                _response.Result = _mapper.Map<CouponDto>(_db.Coupons.FirstOrDefault(x => x.CouponId == id));
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.Message = ex.Message;
-            }
-
-            return _response;
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
         }
 
-        [HttpGet]
-        [Route("GetByCode/{code}")]
-        public ResponseDto GetByCode(string code)
+        return _response;
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "ADMIN")]
+    public ResponseDto Post([FromBody] CouponDto couponDto)
+    {
+        try
         {
-            try
-            {
-                var obj = _db.Coupons.FirstOrDefault(x => x.CouponCode.ToLower() == code.ToLower());
-                if (obj == null)
-                {
-                    _response.IsSuccess = false;
-                }
-                _response.Result = _mapper.Map<CouponDto>(obj);
+            var obj = _mapper.Map<Coupon>(couponDto);
+            _db.Coupons.Add(obj);
+            _db.SaveChanges();
 
-
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.Message = ex.Message;
-            }
-
-            return _response;
+            _response.Result = _mapper.Map<CouponDto>(obj);
         }
-
-        [HttpPost]
-        [Authorize(Roles = "ADMIN")]
-        public ResponseDto Post([FromBody] CouponDto couponDto)
+        catch (Exception ex)
         {
-            try
-            {
-                var obj = _mapper.Map<Coupon>(couponDto);
-                _db.Coupons.Add(obj);
-                _db.SaveChanges();
-
-                _response.Result = _mapper.Map<CouponDto>(obj);
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.Message = ex.Message;
-            }
-
-            return _response;
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
         }
 
-        [HttpPut]
-        [Authorize(Roles = "ADMIN")]
-        public ResponseDto Put([FromBody] CouponDto couponDto)
+        return _response;
+    }
+
+    [HttpPut]
+    [Authorize(Roles = "ADMIN")]
+    public ResponseDto Put([FromBody] CouponDto couponDto)
+    {
+        try
         {
-            try
-            {
-                var obj = _mapper.Map<Coupon>(couponDto);
-                _db.Coupons.Update(obj);
+            var obj = _mapper.Map<Coupon>(couponDto);
+            _db.Coupons.Update(obj);
 
-                _db.SaveChanges();
+            _db.SaveChanges();
 
-                _response.Result = _mapper.Map<CouponDto>(obj);
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.Message = ex.Message;
-            }
-
-            return _response;
+            _response.Result = _mapper.Map<CouponDto>(obj);
         }
-
-        [HttpDelete]
-        [Route("{id:int}")]
-        [Authorize(Roles = "ADMIN")]
-        public ResponseDto Delete(int id)
+        catch (Exception ex)
         {
-            try
-            {
-                var obj = _db.Coupons.FirstOrDefault(x => x.CouponId == id);
-                _db.Coupons.Remove(obj);
-
-                _db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.Message = ex.Message;
-            }
-
-            return _response;
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
         }
+
+        return _response;
+    }
+
+    [HttpDelete]
+    [Route("{id:int}")]
+    [Authorize(Roles = "ADMIN")]
+    public ResponseDto Delete(int id)
+    {
+        try
+        {
+            var obj = _db.Coupons.FirstOrDefault(x => x.CouponId == id);
+            _db.Coupons.Remove(obj!);
+
+            _db.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
+        }
+
+        return _response;
     }
 }

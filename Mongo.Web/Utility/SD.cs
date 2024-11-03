@@ -1,20 +1,19 @@
-﻿namespace Mango.Web.Utility
+﻿namespace Mango.Web.Utility;
+
+public class SD
 {
-    public class SD
+    public static string? CouponAPIBase { get; set; }
+    public static string? ProductAPIBase { get; set; }
+    public static string? ShoppingCartAPI { get; set; }
+    public static string? AuthAPIBase { get; set; }
+    public static string RoleAdmin = "ADMIN";
+    public static string RoleCustomer = "CUSTOMER";
+    public static string TokenCookie = "JWTToken";
+    public enum ApiType
     {
-        public static string? CouponAPIBase { get; set; }
-        public static string? ProductAPIBase { get; set; }
-        public static string? ShoppingCartAPI { get; set; }
-        public static string? AuthAPIBase { get; set; }
-        public static string RoleAdmin = "ADMIN";
-        public static string RoleCustomer = "CUSTOMER";
-        public static string TokenCookie = "JWTToken";
-        public enum ApiType
-        {
-            GET,
-            POST,
-            PUT,
-            DELETE
-        }
+        GET,
+        POST,
+        PUT,
+        DELETE
     }
 }

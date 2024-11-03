@@ -1,11 +1,10 @@
 ﻿using Mango.Services.AuthAPI.Models.Dto;
 
-namespace Mango.Services.AuthAPI.Service.IService
+namespace Mango.Services.AuthAPI.Service.IService;
+
+public interface IAuthService
 {
-    public interface IAuthService
-    {
-        Task<string> Register(RegistrationRequestDto registrationRequestDto);
-        Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
-        Task<bool> AssignRole(string? eamil, string? roleName);
-    }
+    Task<string> Register(RegistrationRequestDto registrationRequestDto);
+    Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
+    Task<bool> AssignRole(string? eamil, string? roleName);
 }
