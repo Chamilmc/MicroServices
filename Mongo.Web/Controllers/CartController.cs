@@ -49,6 +49,25 @@ public class CartController : Controller
     }
 
     [HttpPost]
+    public async Task<IActionResult> EmailCart()
+    {
+        CartDto cart= await LoadCartDtoBaseOnLoggedInUser();
+        cart.CartHeader.Email = User.Claims
+            .Where(x => x.Type == JwtRegisteredClaimNames.Email)?
+            .FirstOrDefault()?
+            .Value;
+
+        var response = await _cartService.EmailCart(cart);
+        if (response != null && response.IsSuccess)
+        {
+            TempData["success"] = "Email will be processed annd sent shortly.";
+            return RedirectToAction(nameof(CartIndex));
+        }
+
+        return View();
+    }
+
+    [HttpPost]
     public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
     {
         cartDto.CartHeader.CouponCode = "";
