@@ -6,7 +6,7 @@ namespace Mango.MessageBus;
 
 public class MessageBus : IMessageBus
 {
-    private string connectionString = "Endpoint=sb://xtractify-sbns-demo.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=LP3m6DULhIES83yrreV0CKfmfWGZHPOOO+ASbHs3UMg=";
+    private string connectionString = "";
 
     public async Task PublishMessage(object message, string topic_queue_name)
     {
